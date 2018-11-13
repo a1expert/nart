@@ -1,0 +1,11 @@
+bitrix
+upload
+.access.php
+*.config
+.jpg
+.png
+.jpeg
+.doc
+.pdf
+PHPMailer
+*jquery*.js
