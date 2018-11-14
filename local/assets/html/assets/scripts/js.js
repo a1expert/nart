@@ -269,4 +269,51 @@ document.addEventListener('DOMContentLoaded', function () {
 		dots: false,
 		mouseDrag: false
 	});
+	const initSmallCarousels = function () {
+		$('.rent__list').owlCarousel({
+			items: 1,
+			loop: true,
+			nav: false,
+			dots: true,
+			mouseDrag: true
+		});
+		$('.services__list').owlCarousel({
+			items: 1,
+			loop: true,
+			nav: false,
+			dots: true,
+			mouseDrag: true
+		});
+	};
+	if (window.matchMedia('(max-width: 767px)').matches) {
+		initSmallCarousels();
+	}
+
+	function destroySmallCarousels() {
+		$('.services__list').trigger('destroy.owl.carousel');
+		$('.rent__list').trigger('destroy.owl.carousel');
+	}
+
+	$(window).on('resize', function () {
+		if (window.matchMedia('(max-width: 767px)').matches) {
+			initSmallCarousels();
+		} else {
+			destroySmallCarousels();
+		}
+	});
+
+	//menu
+	const menuBtn = document.querySelector('.header__menuBtn');
+	const menuBtnOnClick = function (evt) {
+		const self = evt.target;
+		const menu = document.querySelector('.menu');
+		if (self.classList.contains('header__menuBtn_open')) {
+			menu.removeAttribute('style');
+		}else {
+			setTargetContentHeight(menu);
+		}
+		evt.target.classList.toggle('header__menuBtn_open');
+	};
+	menuBtn.addEventListener('click', menuBtnOnClick);
+
 });
