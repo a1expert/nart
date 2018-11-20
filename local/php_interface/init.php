@@ -1,6 +1,7 @@
 <?
 require_once("include/constants.php");
 require_once('include/functions.php');
+require_once('include/ImageHelper.php');
 \Bitrix\Main\Loader::registerAutoLoadClasses(
     null,
     array(
