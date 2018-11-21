@@ -1,11 +1,12 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 use Bitrix\Main\Application,
     Bitrix\Main\Page\Asset,
+    Bitrix\Main\Loader,
     Bitrix\Main\Localization\Loc;
     
 Loc::loadMessages(__FILE__);
 $dir = $APPLICATION->GetCurDir();
-$page = $APPLICATION->GetCurPage();
+$page = $APPLICATION->GetCurPage(true);
 $assets = Asset::getInstance();
 $docRoot = Application::getDocumentRoot();
 ?>
@@ -35,11 +36,13 @@ $docRoot = Application::getDocumentRoot();
 	</head>
 
 	<body class="page">
-    <?$APPLICATION->showPanel();?>
+    <?$APPLICATION->showPanel();
+    /**Тут загружается компонент с общей инфой по сайту. Заходим в дефолтный шаблон компонента и там смотрим нужные ключи. Все что нужно поменять или добавиить - пишется в сам компонент (component.php) */
+    include_once(Loader::getDocumentRoot() . "/local/inc_files/commoninfo/commoninfo.php");?>
         <header role="banner" class="header">
             <div class="container">
                 <div class="row middle-xs between-xs">
-                    <div class="col-xs-5 col-md-3 col-lg-2"><a href="#" class="logo"><img src="/local/assets/images/logo.png" alt="Нарт"
+                    <div class="col-xs-5 col-md-3 col-lg-2"><a href="/" class="logo"><img src="<?=$commonInfo["headerLogo"]?>" alt="Нарт"
                             width="140" height="60" class="logo__picture" title="" /></a></div>
                     <div class="col-md-6 col-lg-7">
                         <?$APPLICATION->IncludeComponent("bitrix:menu", "top",
@@ -59,31 +62,28 @@ $docRoot = Application::getDocumentRoot();
                     </div>
                     <div class="col-xs-5 col-md-3 col-lg-3">
                         <div class="header__info">
-                            <p class="header__phone">+7 (3462) 52-42-42</p><button class="header__cta jsPopup">перезвоните мне</button>
+                            <p class="header__phone"><?=$commonInfo["headerPhone"];?></p><button class="header__cta jsPopup">перезвоните мне</button>
                         </div>
                     </div>
                     <div class="col-xs-2 col-md"><button class="header__menuBtn"><span class="mobileLinesBtn"></span><span class="mobileLinesBtn"></span><span class="mobileLinesBtn"></span></button></div>
                 </div>
             </div>
         </header>
-        <?
-        if($page == "/index.php" || "/transport-services/transportation-children.php")
-        {
-            echo '<main class="main">';
-        }
-        else
-        {?>
+    <?
+    if($page == "/index.php" || $page == "/transport-services/transportation-children.php")
+    {
+        echo '<main class="main">';
+    }
+    else
+    {?>
         <div class="breadcrumbs">
 			<div class="container">
-				<ul class="breadcrumbs__list">
-					<li class="breadcrumbs__item"><a href="#" class="breadcrumbs__link">Главная</a></li>
-					<li class="breadcrumbs__item"><a href="#" class="breadcrumbs__link">Аренда транспорта</a></li>
-				</ul>
+            <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "cocainescrumb", Array("PATH" => "", "SITE_ID" => "s1", "START_FROM" => "0"));?>
 			</div>
         </div>
         <main class="main">
 			<div class="container">
 				<h1 class="pageHeading"><?$APPLICATION->ShowTitle();?></h1>
             </div>
-        <?
-        }?>
+    <?
+    }?>
