@@ -8,6 +8,7 @@ require_once('include/ImageHelper.php');
         'PHPMailer\PHPMailer\PHPMailer' => '/local/php_interface/include/PHPMailer/src/PHPMailer.php',
         'PHPMailer\PHPMailer\Exception' => '/local/php_interface/include/PHPMailer/src/Exception.php',
         'PHPMailer\PHPMailer\SMTP' => '/local/php_interface/include/PHPMailer/src/SMTP.php',
+        'A1expert\MainFixer' => '/local/php_interface/include/a1expert.php',
     )
 );
 

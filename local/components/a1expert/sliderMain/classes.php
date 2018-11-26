@@ -4,7 +4,7 @@ use Bitrix\Main\Context,
 	Bitrix\Main\Loader,
     Bitrix\Iblock;
     
-class Fixer
+class MainSlide
 {
     public function __construct()
     {
@@ -61,12 +61,12 @@ class Fixer
         {
             switch ($v["PROPERTY_TYPE"])
             {
-                case 'F':
+                case "F":
                     $arResult["PROPERTY_". $v["CODE"] . "_VALUE"] = CFile::GetFileArray($arResult["PROPERTY_". $v["CODE"] . "_VALUE"]);
                     break;
-                
+                case "G":
+                    break;
                 default:
-                    # code...
                     break;
             }
         }
@@ -99,5 +99,18 @@ class Fixer
         $tmpArr = array("ID", "IBLOCK_ID");
         $retunArr = array_merge($tmpArr, $array1, $array2);
         return $retunArr;
+    }
+    public function GetElements($arOrder = array(), $arFilter = array(), $arGroupBy = false, $arNavStartParams = false, $arSelect = array())
+    {
+        Loader::includeModule("iblock");
+        if(empty($arOrder))
+        $arOrder = array("SORT"=>"ASC");
+        $rsElement = CIBlockElement::GetList($arOrder, $arFilter, $arGroupBy, $arNavStartParams, $arSelect);
+        while($obElement = $rsElement->GetNextElement())
+        {
+            $arResult = $obElement->fields;
+            $this->GetProps($arResult);
+        }
+        return $arResult;
     }
 }

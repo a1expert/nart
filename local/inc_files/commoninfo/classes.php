@@ -61,12 +61,12 @@ class Fixer
         {
             switch ($v["PROPERTY_TYPE"])
             {
-                case 'F':
+                case "F":
                     $arResult["PROPERTY_". $v["CODE"] . "_VALUE"] = CFile::GetFileArray($arResult["PROPERTY_". $v["CODE"] . "_VALUE"]);
                     break;
-                
+                case "G":
+                    break;
                 default:
-                    # code...
                     break;
             }
         }
