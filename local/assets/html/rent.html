@@ -100,20 +100,21 @@
 						<h2 class="heading visuallyHidden">Фильтрация</h2>
 						<div class="filters__group">
 							<p class="filters__groupName">Кол-во мест:</p>
-							<div class="filters__row"><button type="button" data-filteredby="seats" class="filters__control">26</button><button
-								 type="button" data-filteredby="seats" class="filters__control">33</button><button type="button"
-								 data-filteredby="seats" class="filters__control">43</button><button type="button" data-filteredby="seats"
-								 class="filters__control">45</button><button type="button" data-filteredby="seats" class="filters__control">52</button></div>
+							<div class="filters__row"><button type="button" data-filterBy="seats" data-value="26" class="filters__control">26</button><button
+								 type="button" data-filterBy="seats" data-value="33" class="filters__control">33</button><button type="button"
+								 data-filterBy="seats" data-value="43" class="filters__control">43</button><button type="button" data-filterBy="seats"
+								 data-value="45" class="filters__control">45</button><button type="button" data-filterBy="seats" data-value="52"
+								 class="filters__control">52</button></div>
 						</div>
 						<div class="filters__group">
 							<p class="filters__groupName">Комфортабельность:</p>
-							<div class="filters__row"><button type="button" data-filteredby="type" class="filters__control">Комфорт</button><button
-								 type="button" data-filteredby="type" class="filters__control">Стандарт</button></div>
+							<div class="filters__row"><button type="button" data-filterBy="type" data-value="Комфорт" class="filters__control">Комфорт</button><button
+								 type="button" data-filterBy="type" data-value="Стандарт" class="filters__control">Стандарт</button></div>
 						</div>
 						<div class="filters__group">
 							<p class="filters__groupName">Сортировать по:</p>
-							<div class="filters__row"><button type="button" id="priceUp" data-filteredby="price" class="filters__control">цене
-									&nbsp; &#8593;</button><button type="button" id="priceDown" data-filteredby="price" class="filters__control">цене
+							<div class="filters__row"><button type="button" data-filterBy="price" data-value="priceUp" class="filters__control">цене
+									&nbsp; &#8593;</button><button type="button" data-filterBy="price" data-value="priceDown" class="filters__control">цене
 									&nbsp; &#8595;</button></div>
 						</div>
 					</section>
@@ -210,10 +211,11 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lory.js/2.5.2/lory.min.js"></script>
 		<script src="assets/scripts/polyfills.js"></script>
 		<script src="assets/scripts/debounce.js"></script>
-		<!--script(src="assets/scripts/backend.js")-->
+		<script src="assets/scripts/backend.js"></script>
+		<script src="assets/scripts/card.js"></script>
 		<script src="assets/scripts/select.js"></script>
 		<script src="assets/scripts/accordeon.js"></script>
-		<!--script(src="assets/scripts/card.js")-->
+		<script src="assets/scripts/filters.js"></script>
 		<script src="assets/scripts/js.js"></script>
 	</body>
 

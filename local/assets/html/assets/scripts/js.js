@@ -156,63 +156,93 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//	cards render
 	//	test data
-	//let cards = [];
-	// 	{
-	// 		image: './assets/images/rentItem1.png',
-	// 		name: 'hyundai universe',
-	// 		seats: '26',
-	// 		type: 'Комфорт',
-	// 		price: '3000',
-	// 		label: 'Рекомендуем для перевозки детей'
-	// 	},
-	// 	{
-	// 		image: './assets/images/rentItem2.png',
-	// 		name: 'hyundai universe1',
-	// 		seats: '33',
-	// 		type: 'Стандарт',
-	// 		price: '400',
-	// 		label: ''
-	// 	},
-	// 	{
-	// 		image: './assets/images/rentItem3.png',
-	// 		name: 'hyundai universe2',
-	// 		seats: '43',
-	// 		type: 'Стандарт',
-	// 		price: '75000',
-	// 		label: ''
-	// 	},
-	// 	{
-	// 		image: './assets/images/rentItem4.png',
-	// 		name: 'hyundai universe3',
-	// 		seats: '45',
-	// 		type: 'Комфорт',
-	// 		price: '6000',
-	// 		label: 'Рекомендуем для перевозки детей'
-	// 	},
-	// 	{
-	// 		image: './assets/images/rentItem5.png',
-	// 		name: 'hyundai universe4',
-	// 		seats: '52',
-	// 		type: 'Комфорт',
-	// 		price: '3750',
-	// 		label: ''
-	// 	},
-	// 	{
-	// 		image: './assets/images/rentItem6.png',
-	// 		name: 'hyundai universe5',
-	// 		seats: '33',
-	// 		type: 'Комфорт',
-	// 		price: '9000',
-	// 		label: ''
-	// 	}
-	// ];
+	window.cards = [
+		{
+			image: './assets/images/rentItem1.png',
+			name: 'hyundai universe',
+			seats: '26',
+			type: 'Стандарт',
+			price: '3000',
+			label: 'Рекомендуем для перевозки детей'
+		},
+		{
+			image: './assets/images/rentItem2.png',
+			name: 'hyundai universe1',
+			seats: '26',
+			type: 'Комфорт',
+			price: '400',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem3.png',
+			name: 'hyundai universe2',
+			seats: '33',
+			type: 'Стандарт',
+			price: '75000',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem4.png',
+			name: 'hyundai universe3',
+			seats: '33',
+			type: 'Комфорт',
+			price: '6000',
+			label: 'Рекомендуем для перевозки детей'
+		},
+		{
+			image: './assets/images/rentItem5.png',
+			name: 'hyundai universe4',
+			seats: '43',
+			type: 'Стандарт',
+			price: '3750',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem6.png',
+			name: 'hyundai universe5',
+			seats: '43',
+			type: 'Комфорт',
+			price: '9000',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem5.png',
+			name: 'hyundai universe4',
+			seats: '45',
+			type: 'Стандарт',
+			price: '3750',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem6.png',
+			name: 'hyundai universe5',
+			seats: '45',
+			type: 'Комфорт',
+			price: '9000',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem5.png',
+			name: 'hyundai universe4',
+			seats: '52',
+			type: 'Стандарт',
+			price: '3750',
+			label: ''
+		},
+		{
+			image: './assets/images/rentItem6.png',
+			name: 'hyundai universe5',
+			seats: '52',
+			type: 'Комфорт',
+			price: '9000',
+			label: ''
+		}
+	];
 
-
-
-	const renderCards = function (array) {
+	window.renderCards = function (array) {
+		window.rentGrid.innerHTML = '';
 		window.createCard(array);
 	};
-
 
 	// window.loadData(
 	// 	function (data) {
@@ -223,7 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	// 		console.log(errorMessage);
 	// 	});
 
-
+	if (window.rentGrid) {
+		window.renderCards(window.cards);
+	}
 
 	const gallery = document.querySelectorAll('.jsGallery');
 	if (gallery) {
