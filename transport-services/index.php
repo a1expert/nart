@@ -26,7 +26,7 @@ $APPLICATION->SetTitle("Title");
     "ELEMENT_CODE" => $_REQUEST["ELEMENT_CODE"],
     "ELEMENT_ID" => "",
     "FIELD_CODE" => array("NAME", "DETAIL_PICTURE", ""),
-    "IBLOCK_ID" => "3",
+    "IBLOCK_ID" => SERVICES_ID,
     "IBLOCK_TYPE" => "content",
     "IBLOCK_URL" => "",
     "INCLUDE_IBLOCK_INTO_CHAIN" => "N",

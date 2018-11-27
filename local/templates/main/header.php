@@ -74,7 +74,7 @@ $docRoot = Application::getDocumentRoot();
     {
         echo '<main class="main">';
     }
-    elseif(preg_match("/transport-services\/(.*)\/index.php/", $page))
+    elseif(preg_match("/transport-services\/(.*)\/index.php/", $page) || preg_match("/vehicle-rent\/(.*)\/detail.php/", $page))
     {?>
         <div class="breadcrumbs">
 			<div class="container">

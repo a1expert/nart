@@ -14,13 +14,15 @@ $this->setFrameMode(true);
 use Bitrix\Main\Loader;
 include_once(Loader::getDocumentRoot() . $componentPath . "/classes.php");
 $fixer = new Services();
-ShowRes($arResult);
+// ShowRes($arResult);
 ?>
-<div style="background-image:url(<?=$arResult["DETAIL_PICTURE"]["SRC"]?>)" class="hero hero_picture">
+<div style="background-image:url(<?=(!empty($arResult["DETAIL_PICTURE"]["SRC"])) ? $arResult["DETAIL_PICTURE"]["SRC"] : "/local/assets/images/hero1.png";?>)" class="hero hero_picture">
 	<div class="container">
 		<div class="hero__content">
 			<h1 class="pageHeading"><?=$arResult["NAME"];?></h1>
 			<div class="hero__intro"><?=$arResult["DISPLAY_PROPERTIES"]["DESCRIPTION"]["~VALUE"];?></div>
+		<?if(!empty($arResult["DISPLAY_PROPERTIES"]["ADV_LIST_BLOCK1"]["RESULT"]))
+		{?>
 			<ul class="hero__list">
 				<?foreach ($arResult["DISPLAY_PROPERTIES"]["ADV_LIST_BLOCK1"]["RESULT"] as $k => $v)
 				{?>
@@ -29,7 +31,8 @@ ShowRes($arResult);
 						<div><?=$v["~PROPERTY_TEXT_VALUE"]["TEXT"]?></div>
 					</li><?
 				}?>
-			</ul>
+			</ul><?
+		}?>
 			<div class="hero__footer"><button class="button jsPopup">Оставить заявку</button>
 				<p class="hero__or">или звоните по телефону: <br><strong>+7 (3462) 269-57-58</strong></p>
 			</div>
@@ -40,6 +43,8 @@ ShowRes($arResult);
 	<div class="container">
 		<h2 class="heading"><?=$arResult["DISPLAY_PROPERTIES"]["HEADER_BLOCK2"]["VALUE"];?></h2>
 		<p class="principles__intro"><?=$arResult["DISPLAY_PROPERTIES"]["TEXT_BLOCK2"]["VALUE"];?></p>
+	<?if(!empty($arResult["DISPLAY_PROPERTIES"]["ADV_LIST_BLOCK2"]["RESULT"]))
+	{?>
 		<ol class="principles__list">
 		<?foreach ($arResult["DISPLAY_PROPERTIES"]["ADV_LIST_BLOCK2"]["RESULT"] as $k => $v)
 		{?>
@@ -48,17 +53,22 @@ ShowRes($arResult);
 				<div class="principles__text"><?=$v["DETAIL_TEXT"];?></div>
 			</li><?
 		}?>
-		</ol>
+		</ol><?
+	}?>
 		<p class="principles__outro"><strong><?=$arResult["DISPLAY_PROPERTIES"]["CALL_TO_ACTION"]["VALUE"]?></strong></p>
+	<?if(!empty($arResult["DISPLAY_PROPERTIES"]["DOCS"]["RESULT"]))
+	{?>
 		<ul class="linkBlock">
 		<?foreach ($arResult["DISPLAY_PROPERTIES"]["DOCS"]["RESULT"] as $k => $v)
 		{
 			$fsize = $fixer->GetFSize($v["PROPERTY_DOC_VALUE"]["FILE_SIZE"]);?>
 			<li class="linkBlock__item"><a href="<?=$v["PROPERTY_DOC_VALUE"]["SRC"];?>" class="link link_icon" target="_blank" title="<?=$v["PROPERTY_DOC_VALUE"]["ORIGINAL_NAME"] . "&nbsp;" . $fsize?>"><span><?=$v["NAME"];?></span></a></li><?
 		}?>
-		</ul>
+		</ul><?
+	}?>
 	</div>
 </section>
+<?if(!empty($arResult["DISPLAY_PROPERTIES"]["COMPANY_ADV"]["RESULT"])){?>
 <section class="advantages">
 	<div class="container">
 		<h2 class="heading visuallyHidden">Преимущества сотрудничества с нами</h2>
@@ -75,83 +85,42 @@ ShowRes($arResult);
 		}?>
 		</ul>
 	</div>
-</section>
+</section><?
+}
+if(!empty($arResult["DISPLAY_PROPERTIES"]["VEHICLE"]["RESULT"])){?>
 <section class="similars">
 	<div class="container">
-		<h2 class="heading">Автобусы для перевозки детей</h2>
+		<h2 class="heading"><?=$arResult["DISPLAY_PROPERTIES"]["HEADERS_BLOCK4"]["VALUE"];?></h2>
 		<ul class="similars__list row">
+		<?foreach ($arResult["DISPLAY_PROPERTIES"]["VEHICLE"]["RESULT"] as $k => $v)
+		{?>
 			<li class="similars__item col-xs-12 col-sm-6 col-md-4">
-				<article class="rentItem"><a href="#" class="rentItem__link">
-						<div class="rentItem__header"><img src="assets/images/rentItem1.png" alt="услугаблабла" class="rentItem__picture"
-								title="" /></div>
+				<article class="rentItem">
+					<a href="<?=$v["DETAIL_PAGE_URL"];?>" class="rentItem__link">
+						<div class="rentItem__header"><img src="<?=$v["PREVIEW_PICTURE"]["SRC"];?>" alt="<?=$v["NAME"]?>" class="rentItem__picture"	title="<?=$v["NAME"]?>" /></div>
 						<div class="rentItem__content">
-							<h2 class="rentItem__name"></h2>
+							<h2 class="rentItem__name"><?=$v["NAME"]?></h2>
 							<table class="rentItem__characteristics">
 								<tr>
 									<td>Тип:</td>
-									<td>Автобус</td>
+									<td><?=$v["PROPERTY_VEHICLE_TYPE_VALUE"];?></td>
 								</tr>
 								<tr>
 									<td>Мест:</td>
-									<td class="rentItem__seats"></td>
+									<td class="rentItem__seats"><?=$v["PROPERTY_CAPACITY_VALUE"];?></td>
 								</tr>
 								<tr>
 									<td>Класс:</td>
-									<td class="rentItem__type"></td>
+									<td class="rentItem__type"><?=$v["PROPERTY_COMFORT_VALUE"];?></td>
 								</tr>
 							</table>
-							<p class="rentItem__price"><strong>от &nbsp;<span></span>&nbsp; руб/час</strong></p>
+							<p class="rentItem__price"><strong>от &nbsp;<span><?=$v["PROPERTY_PRICE_VALUE"];?></span>&nbsp; руб/час</strong></p>
 						</div>
-					</a></article>
-			</li>
-			<li class="similars__item col-xs-12 col-sm-6 col-md-4">
-				<article class="rentItem"><a href="#" class="rentItem__link">
-						<div class="rentItem__header"><img src="assets/images/rentItem1.png" alt="услугаблабла" class="rentItem__picture"
-								title="" /></div>
-						<div class="rentItem__content">
-							<h2 class="rentItem__name"></h2>
-							<table class="rentItem__characteristics">
-								<tr>
-									<td>Тип:</td>
-									<td>Автобус</td>
-								</tr>
-								<tr>
-									<td>Мест:</td>
-									<td class="rentItem__seats"></td>
-								</tr>
-								<tr>
-									<td>Класс:</td>
-									<td class="rentItem__type"></td>
-								</tr>
-							</table>
-							<p class="rentItem__price"><strong>от &nbsp;<span></span>&nbsp; руб/час</strong></p>
-						</div>
-					</a></article>
-			</li>
-			<li class="similars__item col-xs-12 col-sm-6 col-md-4">
-				<article class="rentItem"><a href="#" class="rentItem__link">
-						<div class="rentItem__header"><img src="assets/images/rentItem1.png" alt="услугаблабла" class="rentItem__picture"
-								title="" /></div>
-						<div class="rentItem__content">
-							<h2 class="rentItem__name"></h2>
-							<table class="rentItem__characteristics">
-								<tr>
-									<td>Тип:</td>
-									<td>Автобус</td>
-								</tr>
-								<tr>
-									<td>Мест:</td>
-									<td class="rentItem__seats"></td>
-								</tr>
-								<tr>
-									<td>Класс:</td>
-									<td class="rentItem__type"></td>
-								</tr>
-							</table>
-							<p class="rentItem__price"><strong>от &nbsp;<span></span>&nbsp; руб/час</strong></p>
-						</div>
-					</a></article>
-			</li>
+					</a>
+				</article>
+			</li><?
+		}?>
 		</ul>
 	</div>
-</section>
+</section><?
+}?>

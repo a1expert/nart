@@ -8,6 +8,14 @@ $arUrlRewrite=array (
     'PATH' => '/transport-services/index.php',
     'SORT' => 100,
   ),
+  2 => 
+  array (
+    'CONDITION' => '#^/vehicle-rent/(.*)/\\?*(.*?)$#',
+    'RULE' => 'ELEMENT_CODE=$1',
+    'ID' => '',
+    'PATH' => '/vehicle-rent/detail.php',
+    'SORT' => 100,
+  ),
   0 => 
   array (
     'CONDITION' => '#^/rest/#',

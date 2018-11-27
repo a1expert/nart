@@ -1234,11 +1234,11 @@ body {
   height: 50px;
   margin-bottom: 20px;
 }
-.carComplect__text {
+.carComplect__text p{
   font-size: 14px;
   line-height: 1.4;
 }
-.carComplect__text:not(:last-of-type) {
+.carComplect__text p:not(:last-of-type) {
   margin-bottom: 30px;
 }
 @media screen and (min-width: 768px) {
@@ -1248,7 +1248,7 @@ body {
     font-size: 18px;
     text-align: left;
   }
-  .carComplect__text {
+  .carComplect__text p{
     font-size: 18px;
   }
   .carComplect__icon {
@@ -1259,15 +1259,15 @@ body {
 .carDescription {
   padding-bottom: 60px;
 }
-.carDescription__text {
+.carDescription__text p{
   font-size: 14px;
   line-height: 1.4;
 }
-.carDescription__text:not(:last-of-type) {
+.carDescription__text p:not(:last-of-type) {
   margin-bottom: 30px;
 }
 @media screen and (min-width: 768px) {
-  .carDescription__text {
+  .carDescription__text p{
     font-size: 18px;
   }
 }

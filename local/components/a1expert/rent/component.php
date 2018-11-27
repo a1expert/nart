@@ -12,7 +12,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 use Bitrix\Main\Context, Bitrix\Main\Type\DateTime, Bitrix\Main\Loader, Bitrix\Iblock;
 include_once(Loader::getDocumentRoot() . $componentPath . "/classes.php");
-$fixer = new Services();
+$fixer = new Rent();
 CPageOption::SetOptionString("main", "nav_page_in_session", "N");
 
 if(!isset($arParams["CACHE_TIME"]))
@@ -267,8 +267,7 @@ if($arParams["SHOW_WORKFLOW"] || $this->startResultCache(false, array(($arParams
 		foreach($arParams["PROPERTY_CODE"] as $pid)
 		{
 			$prop = &$arResult["PROPERTIES"][$pid];
-			if((is_array($prop["VALUE"]) && count($prop["VALUE"])>0) || (!is_array($prop["VALUE"]) && strlen($prop["VALUE"])>0)
-			)
+			if((is_array($prop["VALUE"]) && count($prop["VALUE"])>0) || (!is_array($prop["VALUE"]) && strlen($prop["VALUE"])>0))
 			{
 				$arResult["DISPLAY_PROPERTIES"][$pid] = CIBlockFormatProperties::GetDisplayValue($arResult, $prop, "news_out");
 				#region Изменения внесенные в компонент
