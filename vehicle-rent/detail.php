@@ -1,10 +1,10 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("");
 ?>
-<?$APPLICATION->IncludeComponent("a1expert:rent", "", Array(
+<?$APPLICATION->IncludeComponent("a1expert:rent.detail", "", Array(
     "ACTIVE_DATE_FORMAT" => "d.m.Y",
     "ADD_ELEMENT_CHAIN" => "Y",
-    "ADD_SECTIONS_CHAIN" => "N",
+    "ADD_SECTIONS_CHAIN" => "Y",
     "AJAX_MODE" => "N",
     "AJAX_OPTION_ADDITIONAL" => "",
     "AJAX_OPTION_HISTORY" => "N",
@@ -24,7 +24,7 @@ $APPLICATION->SetTitle("");
     "DISPLAY_TOP_PAGER" => "N",
     "ELEMENT_CODE" => $_REQUEST["ELEMENT_CODE"],
     "ELEMENT_ID" => "",
-    "FIELD_CODE" => array("NAME", "DETAIL_PICTURE", ""),
+    "FIELD_CODE" => array("NAME", "DETAIL_TEXT"),
     "IBLOCK_ID" => VEHICLE_RENT_ID,
     "IBLOCK_TYPE" => "content",
     "IBLOCK_URL" => "",
@@ -36,15 +36,15 @@ $APPLICATION->SetTitle("");
     "PAGER_SHOW_ALL" => "N",
     "PAGER_TEMPLATE" => ".default",
     "PAGER_TITLE" => "Страница",
-    "PROPERTY_CODE" => array(),
+    "PROPERTY_CODE" => array("VEHICLE_TYPE", "CAPACITY", "COMFORT", "YEAR", "HOURS", "EQUIPMENT", "EQUIPMENT_TEXT", "LICENSE", "DOCS", "SIMILAR", "PRICE", "GALLERY"),
     "SET_BROWSER_TITLE" => "Y",
     "SET_CANONICAL_URL" => "N",
     "SET_LAST_MODIFIED" => "N",
     "SET_META_DESCRIPTION" => "Y",
     "SET_META_KEYWORDS" => "Y",
-    "SET_STATUS_404" => "N",
+    "SET_STATUS_404" => "Y",
     "SET_TITLE" => "Y",
-    "SHOW_404" => "N",
+    "SHOW_404" => "Y",
     "STRICT_SECTION_CHECK" => "N",
     "USE_PERMISSIONS" => "N",
     "USE_SHARE" => "N"));?>

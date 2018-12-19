@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+function Selecter () {
 	const selects = document.querySelectorAll('.select');
 	const closeSelect = function () {
 		[].forEach.call(selects, function (it) {
@@ -82,4 +82,4 @@
 	};
 
 	initFakeSelects();
-}());
+};

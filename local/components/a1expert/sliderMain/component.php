@@ -13,12 +13,8 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 /** @global CIntranetToolbar $INTRANET_TOOLBAR */
 global $INTRANET_TOOLBAR;
 
-use Bitrix\Main\Context,
-	Bitrix\Main\Type\DateTime,
-	Bitrix\Main\Loader,
-	Bitrix\Iblock;
-include_once(Loader::getDocumentRoot() . $componentPath . "/classes.php");
-$fixer = new MainSlide();
+use Bitrix\Main\Context, Bitrix\Main\Type\DateTime, Bitrix\Main\Loader, Bitrix\Iblock, A1expert\MainFixer;
+$fixer = new MainFixer();
 CPageOption::SetOptionString("main", "nav_page_in_session", "N");
 
 if(!isset($arParams["CACHE_TIME"]))

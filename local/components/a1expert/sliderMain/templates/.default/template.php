@@ -38,7 +38,7 @@ if(isset($arItem["DISPLAY_PROPERTIES"]["LIST_IMGS"]["VALUE"]) && count($arItem["
 					</li><?
 				}?>
 				</ul>
-				<div class="hero__footer"><a href="<?=$arItem["DISPLAY_PROPERTIES"]["SERVICE_LINK"]["RESULT"]["DETAIL_PAGE_URL"]?>" class="button">Узнать больше об услуге</a>
+				<div class="hero__footer"><a href="<?=$arItem["DISPLAY_PROPERTIES"]["SERVICE_LINK"]["RESULT"][0]["DETAIL_PAGE_URL"]?>" class="button">Узнать больше об услуге</a>
 					<p class="hero__or">или звоните по телефону: <br><strong>+7 (3462) 269-57-58</strong></p>
 				</div>
 			</div>

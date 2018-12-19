@@ -5,14 +5,13 @@ if (empty($arResult))throw new Exception("\$arResult пустой");?>
 $previousLevel = 0;
 foreach($arResult as $arItem)
 {
-	$withoutLink = (preg_match("/transport-services/", $arItem["LINK"]));
 	if ($previousLevel && $arItem["DEPTH_LEVEL"] < $previousLevel)
 		echo str_repeat("</ul></div></li>", ($previousLevel - $arItem["DEPTH_LEVEL"]));
 	if ($arItem["IS_PARENT"])
 	{
 		if ($arItem["DEPTH_LEVEL"] == 1)
 		{?>
-			<li class="menu__item menu__item_dropdown"><a <?if($withoutLink){echo 'rel=nofollow';}else{echo 'href="'. $arItem["LINK"] .'"';}?> class="menu__link"><?=$arItem["TEXT"]?></a>
+			<li class="menu__item menu__item_dropdown"><a rel="nofollow" href class="menu__link" style="pointer-events: none;"><?=$arItem["TEXT"]?></a>
 				<div class="menu__dropdownLayout">
 					<ul class="menu__dropdownList"><?
 		}else{/*это на случай если меню будет с более чем одной вложенностью.*/}

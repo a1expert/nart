@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Title");
+$APPLICATION->SetTitle("404");
 ?>
 <?$APPLICATION->IncludeComponent("a1expert:services", "", Array(
     "ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -43,9 +43,9 @@ $APPLICATION->SetTitle("Title");
     "SET_LAST_MODIFIED" => "N",
     "SET_META_DESCRIPTION" => "Y",
     "SET_META_KEYWORDS" => "Y",
-    "SET_STATUS_404" => "N",
+    "SET_STATUS_404" => "Y",
     "SET_TITLE" => "Y",
-    "SHOW_404" => "N",
+    "SHOW_404" => "Y",
     "STRICT_SECTION_CHECK" => "N",
     "USE_PERMISSIONS" => "N",
     "USE_SHARE" => "N"));?>

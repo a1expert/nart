@@ -18,6 +18,12 @@ $fixer = new Services();
 ?>
 <div style="background-image:url(<?=(!empty($arResult["DETAIL_PICTURE"]["SRC"])) ? $arResult["DETAIL_PICTURE"]["SRC"] : "/local/assets/images/hero1.png";?>)" class="hero hero_picture">
 	<div class="container">
+		<div class="breadcrumbs breadcrumbs_service">
+			<ul class="breadcrumbs__list">
+				<li class="breadcrumbs__item"><a href="/" class="breadcrumbs__link">Главная</a></li>
+				<li class="breadcrumbs__item"><a href class="breadcrumbs__link"><?=$arResult["NAME"];?></a></li>
+			</ul>
+		</div>
 		<div class="hero__content">
 			<h1 class="pageHeading"><?=$arResult["NAME"];?></h1>
 			<div class="hero__intro"><?=$arResult["DISPLAY_PROPERTIES"]["DESCRIPTION"]["~VALUE"];?></div>
@@ -62,7 +68,11 @@ $fixer = new Services();
 		<?foreach ($arResult["DISPLAY_PROPERTIES"]["DOCS"]["RESULT"] as $k => $v)
 		{
 			$fsize = $fixer->GetFSize($v["PROPERTY_DOC_VALUE"]["FILE_SIZE"]);?>
-			<li class="linkBlock__item"><a href="<?=$v["PROPERTY_DOC_VALUE"]["SRC"];?>" class="link link_icon" target="_blank" title="<?=$v["PROPERTY_DOC_VALUE"]["ORIGINAL_NAME"] . "&nbsp;" . $fsize?>"><span><?=$v["NAME"];?></span></a></li><?
+			<li class="linkBlock__item">
+				<a href="<?=$v["PROPERTY_DOC_VALUE"]["SRC"];?>" class="link link_icon" target="_blank" title="<?=$v["PROPERTY_DOC_VALUE"]["ORIGINAL_NAME"] . "&nbsp;" . $fsize?>" download>
+					<span><?=$v["NAME"];?></span>
+				</a>
+			</li><?
 		}?>
 		</ul><?
 	}?>

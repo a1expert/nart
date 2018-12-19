@@ -28,9 +28,9 @@ $docRoot = Application::getDocumentRoot();
         $assets->addJS('/local/assets/scripts/debounce.js');
 		$assets->addJS('/local/assets/scripts/select.js');
 		$assets->addJS('/local/assets/scripts/accordeon.js');
-		$assets->addJS('/local/assets/scripts/js.js');
+        $assets->addJS('/local/assets/scripts/js.js');
         ?>
-        <link href="/local/assets/images/logo.png" rel="icon" type="image/png">
+        <link href="/local/assets/images/icon.png" rel="icon" type="image/png">
 		<script src='https://www.google.com/recaptcha/api.js' async></script>
 		<title><?$APPLICATION->ShowTitle();?></title>
 	</head>
@@ -70,11 +70,11 @@ $docRoot = Application::getDocumentRoot();
             </div>
         </header>
     <?
-    if($page == "/index.php")
+    if($page == "/index.php" || preg_match("/^\/transport-services\//", $dir))
     {
         echo '<main class="main">';
     }
-    elseif(preg_match("/transport-services\/(.*)\/index.php/", $page) || preg_match("/vehicle-rent\/(.*)\/detail.php/", $page))
+    elseif($realPage == "/transport-services/index.php" || $realPage == "/vehicle-rent/detail.php")
     {?>
         <div class="breadcrumbs">
 			<div class="container">
