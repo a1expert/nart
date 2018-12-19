@@ -154,16 +154,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		showCommentsBtn.addEventListener('click', showComments);
 	}
 
-	//	cards render
-	//	test data
-	window.cards = [
+	// cards render
+	// test data
+	const cards = [
 		{
 			image: './assets/images/rentItem1.png',
 			name: 'hyundai universe',
 			seats: '26',
 			type: 'Стандарт',
 			price: '3000',
-			label: 'Рекомендуем для перевозки детей'
+			label: 'Рекомендуем для перевозки детей',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem2.png',
@@ -171,7 +172,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '26',
 			type: 'Комфорт',
 			price: '400',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem3.png',
@@ -179,7 +181,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '33',
 			type: 'Стандарт',
 			price: '75000',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem4.png',
@@ -187,7 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '33',
 			type: 'Комфорт',
 			price: '6000',
-			label: 'Рекомендуем для перевозки детей'
+			label: 'Рекомендуем для перевозки детей',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem5.png',
@@ -195,7 +199,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '43',
 			type: 'Стандарт',
 			price: '3750',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem6.png',
@@ -203,7 +208,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '43',
 			type: 'Комфорт',
 			price: '9000',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem5.png',
@@ -211,7 +217,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '45',
 			type: 'Стандарт',
 			price: '3750',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem6.png',
@@ -219,7 +226,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '45',
 			type: 'Комфорт',
 			price: '9000',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem5.png',
@@ -227,7 +235,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '52',
 			type: 'Стандарт',
 			price: '3750',
-			label: ''
+			label: '',
+			url: '#'
 		},
 		{
 			image: './assets/images/rentItem6.png',
@@ -235,51 +244,232 @@ document.addEventListener('DOMContentLoaded', function () {
 			seats: '52',
 			type: 'Комфорт',
 			price: '9000',
-			label: ''
+			label: '',
+			url: '#'
 		}
 	];
 
-	window.renderCards = function (array) {
-		window.rentGrid.innerHTML = '';
-		window.createCard(array);
+	//	debounce
+	let lastTimeout;
+	window.debounce = function (func) {
+		if (lastTimeout) {
+			clearTimeout(lastTimeout);
+		}
+		lastTimeout = setTimeout(func, 500);
 	};
 
-	// window.loadData(
-	// 	function (data) {
-	// 		let cards = data;
-	// 		renderCards(cards);
-	// 	},
-	// 	function (errorMessage) {
-	// 		console.log(errorMessage);
-	// 	});
+	//	карточки
+	const rentGrid = document.querySelector('.rentGrid .row');
+	const cardTemplate = document.querySelector('#rentItem');
+	const createCard = function (array) {
+		const cardTemplateContent = cardTemplate.content.querySelector('.rentItem');
+		const fragment = document.createDocumentFragment();
+		array.forEach(function (it) {
+			const rentCard = cardTemplateContent.cloneNode(true);
+			const rentLink = rentCard.querySelector('.rentItem__link');
+			const rentCardImage = rentCard.querySelector('.rentItem__picture');
+			const rentCardName = rentCard.querySelector('.rentItem__name');
+			const rentCardSeats = rentCard.querySelector('.rentItem__seats');
+			const rentCardType = rentCard.querySelector('.rentItem__type');
+			const rentCardPrice = rentCard.querySelector('.rentItem__price span');
+			const rentCardWrapper = document.createElement('li');
+			rentCardWrapper.classList.add('rentGrid__element', 'col-xs-12', 'col-md-4');
+			rentLink.href = it.url;
+			rentCardImage.src = it.image;
+			rentCardName.textContent = it.name;
+			rentCardSeats.textContent = it.seats;
+			rentCardType.textContent = it.type;
+			rentCardPrice.textContent = it.price;
+			if (it.label !== '') {
+				rentCard.dataset.label = it.label;
+				rentCard.classList.add('rentItem_label');
+			}
+			rentCardWrapper.appendChild(rentCard);
+			fragment.appendChild(rentCardWrapper);
+		});
+		rentGrid.appendChild(fragment);
+	};
 
-	if (window.rentGrid) {
-		window.renderCards(window.cards);
+	const renderCards = function (array) {
+		rentGrid.innerHTML = '';
+		createCard(array);
+	};
+
+	if (rentGrid) {
+		renderCards(cards);
 	}
 
-	const gallery = document.querySelectorAll('.jsGallery');
+	//	галлерея
+	const gallery = document.querySelector('.jsGallery');
 	if (gallery) {
-		const createGalleryCarousel = function () {
-			const fragment = '';
+		const fullsize = gallery.querySelector('.carGallery__fullsize');
+		const galleryBtns = gallery.querySelectorAll('button');
+
+		const createImage = btn => {
+			const newImage = document.createElement('img');
+			newImage.src = btn.dataset.src;
+			newImage.alt = btn.dataset.description;
+			fullsize.innerHTML = '';
+			fullsize.appendChild(newImage);
 		};
-		const galleryOnClick = function (evt) {
-			const target = evt.target;
-			const galleryImg = target.querySelectorAll('img');
-			if (target === target.closest('img')) {
-				const fullsize = document.createElement('div');
-				fullsize.classList.add('jsGallery__image');
-				fullsize.src = target.dataset.src;
-				document.body.appendChild(fullsize);
+
+		const createVideo = btn => {
+			const video = document.createElement('video');
+			video.controls = true;
+			video.autoplay = true;
+			const source = document.createElement('source');
+			source.src = btn.dataset.src;
+			video.appendChild(source);
+			fullsize.innerHTML = '';
+			fullsize.appendChild(video);
+		};
+
+		const createFullsize = btn => {
+			if (btn.dataset.type === 'img') {
+				createImage(btn);
+			}else {
+				createVideo(btn);
 			}
 		};
 
-		[].forEach.call(gallery, function (it) {
-			it.addEventListener('click', galleryOnClick);
-		});
+		const setActive = btn => {
+			[].forEach.call(galleryBtns, function (it) {
+				it.classList.remove('carGallery__button_active');
+			});
+			btn.classList.add('carGallery__button_active');
+		};
+
+		const galleryOnClick = evt => {
+			const target = evt.target;
+			if (target === target.closest('button')) {
+				createFullsize(target);
+				setActive(target);
+			}
+		};
+
+		const galleryInit = () => {
+			for (let i = 0; i < galleryBtns.length; i++) {
+				galleryBtns[i].style.backgroundImage = 'url(' + galleryBtns[i].dataset.preview + ')';
+				createImage(galleryBtns[0]);
+			}
+			gallery.addEventListener('click', galleryOnClick);
+		};
+
+		galleryInit();
 	}
+
+	//	фильтр
+	const filters = document.querySelector('.filters__block');
+	const filtersToggle = document.querySelector('.filters__filterToggle');
+
+	const filter = {
+		seats: 'any',
+		type: 'any',
+		price: 'any'
+	};
+
+	const seatsFilter = (seats, comparedSeats) => {
+		if (comparedSeats === 'any') {
+			return true;
+		}
+		return seats === comparedSeats;
+	};
+
+	const typeFilter = (type, comparedType) => {
+		if (comparedType === 'any') {
+			return true;
+		}
+		return type === comparedType;
+	};
+
+	const applyFilters = arr => {
+		return arr.filter(it => {
+			return seatsFilter(it.seats, filter.seats) && typeFilter(it.type, filter.type);
+		});
+	};
+
+	const addFilter = (type, value) => {
+		filter[type] = value;
+	};
+
+	const activateFilterBtn = button => {
+		const siblingsFilterButtons = button.parentNode.children;
+		[].forEach.call(siblingsFilterButtons, function (it) {
+			it.classList.remove('filters__control_active');
+		});
+		button.classList.add('filters__control_active');
+	};
+
+	const deactivateFilterBtn = button => {
+		button.classList.remove('filters__control_active');
+	};
+
+	const sortByPrice = arr => {
+		let prices = arr.slice().sort(function (a, b) {
+			if (parseInt(a.price, 10) > parseInt(b.price, 10)) {
+				return 1;
+			}
+			if (parseInt(a.price, 10) < parseInt(b.price, 10)) {
+				return -1;
+			}
+			return 0;
+		});
+		return prices;
+	};
+
+	const checkSorting = arr => {
+		switch (filter.price) {
+			case 'any':
+				return arr;
+			case 'priceUp':
+				return sortByPrice(arr);
+			case 'priceDown':
+				return sortByPrice(arr).reverse();
+		}
+	};
+
+	const filtersOnClick = evt => {
+		const target = evt.target;
+		const filterBy = target.dataset.filterby;
+		const value = target.dataset.value;
+		let filteredCards = [];
+		let sortedCards = [];
+		if (!target.classList.contains('filters__control_active') && target.closest('.filters__control')) {
+			activateFilterBtn(target);
+			addFilter(filterBy, value);
+			filteredCards = applyFilters(cards);
+			sortedCards = checkSorting(filteredCards);
+			debounce(function () {
+				renderCards(sortedCards);
+			});
+		}else {
+			deactivateFilterBtn(target);
+			addFilter(filterBy, 'any');
+			filteredCards = applyFilters(cards);
+			debounce(function () {
+				renderCards(filteredCards);
+			});
+		}
+	};
+
+	const toggleFilters = (btn) => {
+		btn.classList.toggle('filters__filterToggle_open');
+		const toggledFilter = btn.parentNode.querySelector('.filters__block');
+		toggledFilter.classList.toggle('filters__block_shown');
+	};
+
+	const filterToggleOnClick = (evt) => {
+		toggleFilters(evt.target);
+	};
+
+	if (filters) {
+		filters.addEventListener('click', filtersOnClick);
+		filtersToggle.addEventListener('click', filterToggleOnClick);
+	}
+
+
 	var carouselPrev = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5"><g><path d="M302.67 90.877l55.77 55.508L254.575 250.75 358.44 355.116l-55.77 55.506L143.56 250.75z"/></g></svg>';
 	var carouselNext = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5"><g><path d="M199.33 410.622l-55.77-55.508L247.425 250.75 143.56 146.384l55.77-55.507L358.44 250.75z"/></g></svg>';
-
 
 	$('.hero__carousel').owlCarousel({
 		items: 1,
@@ -347,5 +537,33 @@ document.addEventListener('DOMContentLoaded', function () {
 		evt.target.classList.toggle('header__menuBtn_open');
 	};
 	menuBtn.addEventListener('click', menuBtnOnClick);
+
+	$('.gGallery-js').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0, 1]
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+		}
+	});
+
+	$('.lGallery-js').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0, 1]
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+		}
+	});
 
 });
