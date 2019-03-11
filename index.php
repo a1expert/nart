@@ -87,7 +87,7 @@ $APPLICATION->SetTitle("Главная страница");
 </section>
 <section class="services">
     <div class="container">
-        <h2 class="heading heading_center">Популярные услугги</h2>
+        <h2 class="heading heading_center">Популярные услуги</h2>
         <p class="services__description">Транспортная компания «Нарт» - лидер по предоставлению услуг аренды автомобилей,
             минивэнов, микроавтобусов и автобусов в Сургуте, ХМАО и ЯНАО.</p>
         <?$APPLICATION->IncludeComponent("bitrix:news.list", "mainServices", Array(
